@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 03 déc. 2020 à 15:47
+-- Généré le : ven. 04 déc. 2020 à 18:19
 -- Version du serveur :  10.4.14-MariaDB
 -- Version de PHP : 7.4.11
 
@@ -115,7 +115,7 @@ INSERT INTO `products` (`id`, `name`, `description`, `picture`, `price`, `stock`
 (6, 'Filtre Large !', 'Ce filtre avec une grosse embouchure pour faire passer une fumer plus dense et compact sa vous brulez !', 'product6.jpg', 20, 6, 4, 3),
 (7, 'Petit Filtre', 'Petit filtre très appréciables qui se transporte de partout !', 'product7.jpg', 6, 17, 1, 1),
 (8, 'Tuyaux de couleur', 'Ce tuyaux de couleur ne pourra se confondre avec aucun autre ! Vous pouvez le personnalisé avec votre si vous le souhaitez !', 'product8.jpg', 15, 14, 2, 1),
-(9, 'Filtro+ Large', 'Très gros filtre pour des personne expérimenter un filtre qui fait tout passer et qui risque de vous faire toussez !', 'product9.jpg', 7.99, 8, 4, 2),
+(9, 'Filtro+ Large', 'Très gros filtre pour les des personne expérimenter un filtre qui fait tout passer et qui risque de vous faire toussez !', 'product9.jpg', 7.99, 8, 4, 2),
 (10, 'Filtre élégant ', 'Ce petit filtre transportable de partout ! Est très jolie par son design épurer et sombre et il passe partout pour tout type de session !', 'product10.jpg', 9.99, 5, 1, 3);
 
 -- --------------------------------------------------------
@@ -138,9 +138,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `email`, `password`, `firstname`, `lastname`, `createdAt`) VALUES
-(14, 'didier@hotmail.com', 'didier', 'ddd', 'didier', '2020-12-03 14:07:08'),
-(25, 'dideir51@gmail.com', 'cesfveds', 'ddd', 'didie', '2020-12-03 15:03:08'),
-(29, 'jeje@gmail.com', 'dzefdqaf', 'GG', 'GG', '2020-12-03 15:26:26');
+(36, 'test@gmail.com', '12345678', 'Stollpy', 'test', '2020-12-04 14:19:55');
 
 --
 -- Index pour les tables déchargées
@@ -206,13 +204,13 @@ ALTER TABLE `creators`
 -- AUTO_INCREMENT pour la table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
