@@ -1,25 +1,25 @@
 <section class="container">
     <h2></h2>
-    <form action="create_product.php" method="post">
+    <form action="create_product.php" method="POST">
         <div class="form-group">
             <label for="name">Nom du produit</label>
-            <input type="text" class="form-control" id="name" name="name" >
+            <input type="text" class="form-control" id="name" name="name" value="<?=$results['name'];?>" >
         </div>
         <div class="form-group">
             <label for="description">Description produit</label>
-            <input type="text" class="form-control" id="description" name="description">
+            <input type="text" class="form-control" id="description" name="description" value="<?=$results['description'];?>">
         </div>
         <div class="form-group">
             <label for="picture">Picture</label>
-            <input type="text" class="form-control" id="picture" name="picture">
+            <input type="text" class="form-control" id="picture" name="picture" value="<?=$results['picture'];?>">
         </div>
         <div class="form-group">
             <label for="stock">Stock</label>
-            <input type="text" class="form-control" id="stock" name="stock">
+            <input type="text" class="form-control" id="stock" name="stock" value="<?=$results['stock'];?>">
         </div>
         <div class="form-group">
             <label for="prix">Prix en €</label>
-            <input type="text" class="form-control" id="prix" name="price">
+            <input type="text" class="form-control" id="prix" name="price" value="<?=$results['price'];?>">
         </div>
         <div class="form-group">
             <label for="category">Catégory</label>

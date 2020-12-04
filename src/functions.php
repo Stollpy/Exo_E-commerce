@@ -370,10 +370,50 @@ function logout(){
  ***** ADMINISTRATION *****
  **************************/
 
+//  Delete product
 function DeleteProductById(int $id)
 {
     $sql = 'DELETE FROM products
         WHERE id = ?';
 
     return prepareAndExecuteQuery($sql, [$id]);
+}
+
+
+// add Product
+function insertProduct(string $name, string $description, string $picture, string $price, string $stock, string $category, string $creator)
+{
+    $sql = 'INSERT INTO products (name, description, picture, price, stock, cateroy_id, creator_id)
+            VALUES (?, ?, ?, ?, ?, ?, ?)';
+
+    prepareAndExecuteQuery($sql, [$name, $description, $picture, $price, $stock, $category, $creator]);
+}
+
+
+// Display Form Update Product
+function DisplayUpdateProduct(int $id)
+{
+    $sql = 'SELECT name, description, picture, price, stock, cateroy_id, creator_id
+    FROM products
+    WHERE id = ?';
+
+    return selectOne($sql, [$id]);
+}
+
+
+function UpdateProduct( string $name, string $description, string $picture, string $price, string $stock, string $category, string $creator, int $id)
+{
+    $sql = 'UPDATE products
+    SET 
+    name = ?, 
+    description = ?,
+    picture = ?, 
+    picture = ?,
+    price = ?,
+    stock = ?, 
+    cateroy_id = ?,
+    creator_id = ?
+    WHERE id = ?';
+
+    prepareAndExecuteQuery($sql, [$id, $name, $description, $picture, $price, $stock, $category, $creator]);
 }

@@ -32,7 +32,7 @@
                 <td><?=$product['label'];?></td>
                 <td><?=$product['shop_name'];?></td>
                 <td><a href="delete_product.php?id=<?=$product['id'];?>">Supprimer</a></td>
-                <td><a href="update_product.php">Modifier</a></td>
+                <td><a href="update_product.php?id=<?=$product['id'];?>">Modifier</a></td>
             </tr>
         <?php endforeach; ?>
     </tbody>
