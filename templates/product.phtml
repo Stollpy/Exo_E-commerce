@@ -1,0 +1,58 @@
+<?php if(!empty($flashMessages)) :?>
+
+        <?php foreach ($flashMessages as $Message) : ?>
+            <p class="alert alert-success"><?=$Message;?></p>
+        <?php endforeach; ?>
+
+<?php endif; ?>
+
+<article>
+    <img class="card-img-top" src="images/<?=$product['picture'];?>" alt="">
+    <div class="card-body">
+        <span class="badge badge-secondary"><?=$product['label'];?></span>
+        <p class="card-text">Prix : <?=$product['price'];?> €</p>
+        <?php if ($product['stock'] <= 5): ?>
+            <p class="card-text">Il ne reste plus que <?=$product['stock'];?> exemplaire(s) !</p>
+        <?php endif; ?>
+        <p><?=nl2br($product['description']);?></p>
+    </div>
+    <div class="card-footer text-muted">
+        Proposé par <span><?=$product['shop_name'];?></span>
+    </div>
+</article>
+            
+<?php if(IsAuthentificated()): ?>
+        <!-- Formulaire de commentaire --> 
+    <form action="add_comment.php" method="POST">
+        <input type="hidden" name="product-id" value="<?=$product['id'];?>">
+        <fieldset>
+            <legend>Donnez votre avis !</legend>
+            <div>
+                <label for="content">Votre commentaire</label>
+                <textarea id="content" name="content"></textarea>
+            </div>
+        </fieldset>
+        <input type="submit" value="Envoyer">        
+    </form>
+<?php else: ?>
+    <p><a href="login.php">Connectez-vous pour donner votre avis !</a></p>
+
+<?php endif; ?>
+
+
+<!-- Liste des commentaires  -->
+
+<?php if (empty($comments)) : ?>
+    <p>Soyez le premier à donner votre avis !</p>
+
+<?php else : ?>
+    <ul>
+        <?php foreach ($comments as $comment): ?>
+            <li>
+                <small>Ajouté le <?=format_date($comment['createdAt']); ?></small>
+                <p><?=$comment['content']; ?>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+
+<?php endif; ?>
