@@ -1,0 +1,40 @@
+<div class="row">
+    <ul>
+        <li><a href="create_product.php"><img src="./images/plus-solid.svg" alt="plus" class="w-25"> un produit</a></li>
+    </ul>
+</div>
+
+<section class="container">
+    <table class="table">
+    <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">name</th>
+            <th scope="col">description</th>
+            <th scope="col">picture</th>
+            <th scope="col">price</th>
+            <th scope="col">stock</th>
+            <th scope="col">category</th>
+            <th scope="col">creator</th>
+            <th scope="col">Supprimer</th>
+            <th scope="col">Modifier</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($products as $product): ?>
+            <tr>
+                <th scope="row"><?=$product['id'];?></th>
+                <td><?=$product['name'];?></td>
+                <td><?=$product['description'];?></td>
+                <td><?=$product['picture'];?></td>
+                <td><?=$product['price'];?> €</td>
+                <td><?=$product['stock'];?></td>
+                <td><?=$product['label'];?></td>
+                <td><?=$product['shop_name'];?></td>
+                <td><a href="delete_product.php?id=<?=$product['id'];?>">Supprimer</a></td>
+                <td><a href="update_product.php">Modifier</a></td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+    </table>
+</section>

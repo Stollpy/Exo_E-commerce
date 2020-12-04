@@ -78,7 +78,7 @@ function selectColumn(string $sql, array $criteria = [])
  *********************************/
 function getAllProducts()
 {
-    $sql = 'SELECT products.id, name, price, stock, picture, label, shop_name
+    $sql = 'SELECT products.id, name, price, stock, picture, label, shop_name, description
             FROM products
             INNER JOIN categories ON categories.id = products.cateroy_id
             INNER JOIN creators ON creators.id = products.creator_id';
@@ -362,4 +362,18 @@ function logout(){
 
         session_destroy();
     }
+}
+
+
+
+/**************************
+ ***** ADMINISTRATION *****
+ **************************/
+
+function DeleteProductById(int $id)
+{
+    $sql = 'DELETE FROM products
+        WHERE id = ?';
+
+    return prepareAndExecuteQuery($sql, [$id]);
 }
