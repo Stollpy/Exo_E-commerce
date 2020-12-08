@@ -109,22 +109,38 @@ function getProductById(int $id)
 
 
 //  Insérer un commentaire 
-function insertComment(string $content, int $productId)
+function insertComment(string $content, int $productId, int $user_id)
 {
-    $sql = 'INSERT INTO comments (content, createdAt, product_id)
-            VALUES (?, NOW(), ?)';
+    $sql = 'INSERT INTO comments (content, createdAt, product_id, user_id)
+            VALUES (?, NOW(), ?, ?)';
 
-    prepareAndExecuteQuery($sql, [$content, $productId]);
+    prepareAndExecuteQuery($sql, [$content, $productId, $user_id]);
 }
 
 
-// Commentaire en fonction de l'id
-function getCommentsByProductId(int $productId)
+function getUserID() : int
 {
-    $sql = 'SELECT content, createdAt, product_id
+    if(!IsAuthentificated()){
+        return null;
+    }
+
+    return $_SESSION['user']['id'];
+}
+
+
+
+// Commentaire en fonction de l'id
+function getCommentsByProductId(int $productId, bool $validate = true)
+{
+    $sql = 'SELECT content, comments.createdAt, product_id, user.lastname, user.firstname
             FROM comments
-            WHERE product_id = ?
-            ORDER BY createdAt DESC';
+            INNER JOIN user ON user.id = user_id
+            WHERE product_id = ?';
+        
+        if($validate){
+            $sql .= ' AND validate = 1';
+        }
+            $sql .=' ORDER BY createdAt DESC';
 
     return selectAll($sql, [$productId]);
 }
@@ -135,6 +151,7 @@ function format_date($date)
     $objDate = new DateTime($date);
     return $objDate->format('d/m/Y');
 }
+
 
 
 
@@ -418,4 +435,46 @@ function UpdateProduct( string $name, string $description, string $picture, floa
     prepareAndExecuteQuery($sql, [$name, $description, $picture, $price, $stock, $category, $creator, $productId]);
 }
 
- 
+
+/****************************************
+ **** RECUPERATION COMMENTAIRE ADMIN ****
+ ****************************************/
+function GetAllComments()
+{
+    $sql = 'SELECT comments.id, content, comments.createdAt , products.name, user.firstname, user.lastname, validate
+    FROM comments
+    INNER JOIN products ON products.id = product_id
+    INNER JOIN user ON user.id = user_id
+    ORDER BY comments.createdAt DESC';
+
+    return selectAll($sql);
+}
+
+// Delete comments
+function DeleteCommentById(int $id)
+{
+    $sql = 'DELETE FROM comments
+        WHERE id = ?';
+
+    return prepareAndExecuteQuery($sql, [$id]);
+}
+
+function ValidateComment($validate, int $id)
+{
+    $sql = 'UPDATE comments
+    SET 
+    validate = ?
+    WHERE id = ? ';
+
+    return prepareAndExecuteQuery($sql, [$validate, $id]);
+}
+
+
+
+ function getUserFullname(): string 
+ {
+    if(!isAuthenticated()){
+        return null;
+    }
+    return $_SESSION['user']['firstname'].''.$_SESSION['user']['lastname'];
+ }

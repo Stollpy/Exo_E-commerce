@@ -8,11 +8,13 @@ require '../src/functions.php';
 
 
  // Récupérer les données du formulaire
- $content = $_POST['content'];
+ $content = strip_tags($_POST['content']);
  $productId = $_POST['product-id'];
+ $user_id = getUserID();
 
 // Insertion du commentaire dans la table comments
-insertComment($content, $productId);
+insertComment($content, $productId, $user_id);
+
 
 // création d'un message falsh
 addFlashMessage('Votre commentraire à bien été enregistrer !');

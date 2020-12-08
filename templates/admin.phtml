@@ -31,8 +31,8 @@
                 <td><?=$product['stock'];?></td>
                 <td><?=$product['label'];?></td>
                 <td><?=$product['shop_name'];?></td>
-                <td><a href="delete_product.php?id=<?=$product['id'];?>">Supprimer</a></td>
-                <td><a href="update_product.php?id=<?=$product['id'];?>">Modifier</a></td>
+                <td class="text-center"><a href="delete_product.php?id=<?=$product['id'];?>" class="text-danger"><i class="fas fa-trash-alt"></i></a></td>
+                <td class="text-center"><a href="update_product.php?id=<?=$product['id'];?>" class="text-info"><i class="far fa-edit"></i></a></td>
             </tr>
         <?php endforeach; ?>
     </tbody>

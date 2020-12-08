@@ -28,6 +28,8 @@ $product = getProductById($productId);
 
 $comments = getCommentsByProductId($productId);
 
+// dump($UserComment);
+
 
 // Affichage : inclusion du fichier de template
 $pageTitle = $product['name'];

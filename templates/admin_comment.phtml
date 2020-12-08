@@ -1,0 +1,37 @@
+<section class="container">
+    <table class="table">
+    <thead>
+        <tr>
+            <th scope="col">status</th>
+            <th scope="col">id</th>
+            <th scope="col">name Product</th>
+            <th scope="col">comment</th>
+            <th scope="col">creator</th>
+            <th scope="col">Date</th>
+            <th scope="col">Supprimer</th>
+            <th scope="col">Valider / Masquer</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($comments as $comment): ?>
+            <tr>
+                <?php if($comment['validate'] == 0 ):?>
+                <td><span class="badge rounded-pill badge-warning">En attente</span></td>
+                <?php else: ?>
+                <td><span class="badge rounded-pill badge-success">Validé</span></td>
+                <?php endif; ?>
+                <td><?=$comment['id'];?></td>
+                <td><?=$comment['name'];?></td>
+                <td><?=$comment['content'];?></td>
+                <td><?=$comment['firstname'].' '.$comment['lastname'];?></td>
+                <td><?=format_date($comment['createdAt']);?></td>
+                <td class="text-center"><a href="delete_comment.php?id=<?=$comment['id'];?>" class="text-danger"><i class="fas fa-trash-alt"></i></a></td>
+                <td class="text-center">
+                    <a href="validate_comment.php?id=<?=$comment['id'];?>&validate=1" class="text-success"><i class="fas fa-check-circle"></i></a>
+                    <a href="validate_comment.php?id=<?=$comment['id'];?>&validate=0" class="text-danger"><i class="fas fa-minus-circle"></i></a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+    </table>
+</section>

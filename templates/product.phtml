@@ -50,7 +50,8 @@
         <?php foreach ($comments as $comment): ?>
             <li>
                 <small>Ajouté le <?=format_date($comment['createdAt']); ?></small>
-                <p><?=$comment['content']; ?>
+                <p><?=nl2br(htmlspecialchars($comment['content']));?>
+                <small>Ecrit par <?=$comment['firstname'].' '.$comment['lastname'];?></small>
             </li>
         <?php endforeach; ?>
     </ul>
