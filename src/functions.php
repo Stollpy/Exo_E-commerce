@@ -24,9 +24,9 @@ function getPDOConnection()
     return $pdo;
 }
 
-/**
- * Prépare et exécute une requête SQL
- */
+/*********************************************
+ **** PREPARATION & EXECUTION REQUETE SQL ****
+ *********************************************/
 function prepareAndExecuteQuery(string $sql, array $criteria = []): PDOStatement
 {
     // Connexion PDO
@@ -223,12 +223,12 @@ function hasFlashMessage() : bool {
  **** CREATION COMPTE CLIENT ****
  ********************************/
 
-function insertUser( string $Last_Name, string $First_Name, string $email, string $password)
+function insertUser( string $Last_Name, string $First_Name, string $email, string $password, string $role)
 {
-    $sql = 'INSERT INTO user (lastname, firstname, email, password)
-            VALUES (?, ?, ?, ?)';
+    $sql = 'INSERT INTO user (lastname, firstname, email, password, role)
+            VALUES (?, ?, ?, ?, ?)';
 
-    prepareAndExecuteQuery($sql, [$Last_Name, $First_Name, $email, $password]);
+    prepareAndExecuteQuery($sql, [$Last_Name, $First_Name, $email, $password, $role]);
 }
 
 
@@ -240,7 +240,7 @@ function EmailExists(string $email){
 
     // $email = $_POST['email'];
 
-    $sql = 'SELECT email, password, firstname, lastname, id
+    $sql = 'SELECT email, password, firstname, lastname, id, role
     FROM user
     WHERE email = ?';
 
@@ -330,7 +330,7 @@ function initSession(){
     }
 }
 
-function userSessionRegister(int $id, string $firstname, string $lastname, string $email){
+function userSessionRegister(int $id, string $firstname, string $lastname, string $email, string $role){
     
     initSession();
     
@@ -338,7 +338,8 @@ function userSessionRegister(int $id, string $firstname, string $lastname, strin
         'id' => $id,
         'firstname' => $firstname,
         'lastname' => $lastname,
-        'email' => $email
+        'email' => $email, 
+        'role' => $role
     ];
 }
 
@@ -381,7 +382,7 @@ function DeleteProductById(int $id)
 
 
 // add Product
-function insertProduct(string $name, string $description, string $picture, string $price, string $stock, string $category, string $creator)
+function insertProduct(string $name, string $description, string $picture, float $price, string $stock, int $category, int $creator)
 {
     $sql = 'INSERT INTO products (name, description, picture, price, stock, cateroy_id, creator_id)
             VALUES (?, ?, ?, ?, ?, ?, ?)';
@@ -393,7 +394,7 @@ function insertProduct(string $name, string $description, string $picture, strin
 // Display Form Update Product
 function DisplayUpdateProduct(int $id)
 {
-    $sql = 'SELECT name, description, picture, price, stock, cateroy_id, creator_id
+    $sql = 'SELECT name, description, picture, price, stock, cateroy_id, creator_id, id
     FROM products
     WHERE id = ?';
 
@@ -401,19 +402,20 @@ function DisplayUpdateProduct(int $id)
 }
 
 
-function UpdateProduct( string $name, string $description, string $picture, string $price, string $stock, string $category, string $creator, int $id)
+function UpdateProduct( string $name, string $description, string $picture, float $price, int $stock, int $category, int $creator, int $productId)
 {
     $sql = 'UPDATE products
     SET 
     name = ?, 
     description = ?,
     picture = ?, 
-    picture = ?,
     price = ?,
     stock = ?, 
     cateroy_id = ?,
     creator_id = ?
     WHERE id = ?';
 
-    prepareAndExecuteQuery($sql, [$id, $name, $description, $picture, $price, $stock, $category, $creator]);
+    prepareAndExecuteQuery($sql, [$name, $description, $picture, $price, $stock, $category, $creator, $productId]);
 }
+
+ 

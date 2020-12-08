@@ -9,7 +9,7 @@ $error = null;
 if(!empty($_POST)){
 
     $email = $_POST['email'];
-    $password = $_POST['password'];
+    $password = hash(sha256, $_POST['password']);
 
     $error = validateLoginForm($email, $password);
 
@@ -24,7 +24,8 @@ if(!empty($_POST)){
                 $result['id'],
                  $result['firstname'],
                  $result['lastname'],
-                $result['email']
+                $result['email'], 
+                $result['role']
             );
           
             addFlashMessage('Vous êtes connecter '.$result['firstname'].' !');
@@ -33,7 +34,7 @@ if(!empty($_POST)){
 
         }else{
 
-            $error[] = $result;
+            // $flashMessages = addFlashMessage('Votre E-mail ou mot de passe est incorrect');
         }
     }
 }
@@ -44,4 +45,5 @@ if(!empty($_POST)){
 
 render('login', [
     'pageTitle' => $pageTitle,
+    // 'flashMessages' => $flashMessages
     ]);

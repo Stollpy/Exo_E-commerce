@@ -8,13 +8,13 @@ if(!empty($_POST)){
     $Last_Name = $_POST['lastname'];
     $First_Name = $_POST['firstname'];
     $email = $_POST['email'];
-    $password = $_POST['password'];
+    $password = hash(sha256, $_POST['password']);
 
      $error = ValidEmail($email, $password);
 
     if($error === null){
         // insertion user dans la BDD
-        insertUser($Last_Name, $First_Name, $email, $password);
+        insertUser($Last_Name, $First_Name, $email, $password, ROLE_USER);
 
 
         // création d'un message falsh

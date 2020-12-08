@@ -7,13 +7,13 @@ if(!empty($_POST)){
     $name = $_POST['name'];
     $description = $_POST['description'];
     $picture = $_POST['picture'];
-    $price = $_POST['price'];
+    $price = str_replace(',', '.', $_POST['price']);
     $stock = $_POST['stock'];
     $category = $_POST['category'];
     $creator = $_POST['creator'];
 
     insertProduct($name, $description, $picture, $price, $stock, $category, $creator);
-    addFlashMessage('Le produit à bien été supprimé');
+    addFlashMessage('Le produit à bien été créer');
     header('Location: admin.php');
 
 }
